@@ -6,12 +6,6 @@
     }
 
     stages {
-      stage('fetch_latest_code') {
-        steps {
-          git url: 'https://github.com/PrashantBhatasana/terraform-jenkins-ec2'
-        }
-      }
-
       stage('TF Init&Plan') {
         steps {
           sh 'terraform init'
