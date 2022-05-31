@@ -17,8 +17,7 @@
             parallel {
                 stage("driftctl") {
                     steps {
-                        sh "which dctlenv || git clone https://github.com/wbeuil/dctlenv"
-                        sh "dctlenv use latest"
+                        
                         sh "driftctl scan"
                     }
                 }
