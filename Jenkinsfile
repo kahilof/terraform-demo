@@ -9,13 +9,18 @@
     stages {
         stage("Init") {
             steps {
-                sh "terraform init -reconfigure"
+                sh "terraform init"
             }
         }
         stage('Validate') {
             failFast true
             parallel {
-                
+                stage("driftctl") {
+                    steps {
+                        
+                        sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/"
+                    }
+                }
                 stage("terraform/fmt") {
                     steps {
                         sh "terraform fmt -check -diff"
