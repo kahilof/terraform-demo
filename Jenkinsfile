@@ -18,7 +18,7 @@
                 stage("driftctl") {
                     steps {
                         
-                        sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate"
+                        sh "LOG_LEVEL=error driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate"
                     }
                 }
                 stage("terraform/fmt") {
