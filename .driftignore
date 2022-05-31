@@ -1,1 +1,2 @@
-aws_security_group_rule.*
+*
+!aws_ec2_*
