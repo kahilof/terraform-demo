@@ -1,9 +1,9 @@
   pipeline {
+    
     agent {
       node {
         label "aws"
       }
-    }
     }
 
     stages {
