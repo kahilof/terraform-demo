@@ -1,9 +1,9 @@
   pipeline {
-    agent any
-    environment {
-        AWS_DEFAULT_REGION="eu-west-1"
-        PATH="$PATH:$HOME/dctlenv/bin/"
+    agent {
+      node {
+        label "aws"
       }
+    }
     }
 
     stages {
