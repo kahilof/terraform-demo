@@ -18,7 +18,7 @@
                 stage("driftctl") {
                     steps {
                         
-                        sh "driftctl scan"
+                        sh "driftctl scan --from tfstate+s3://terraform-state-467406547633/terraform-demo/"
                     }
                 }
                 stage("terraform/fmt") {
