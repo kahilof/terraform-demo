@@ -6,25 +6,42 @@
     }
 
     stages {
-      stage('TF Init&Plan') {
-        steps {
-          sh 'terraform init'
-          sh 'terraform plan'
-        }      
-      }
-
-      stage('Approval') {
-        steps {
-          script {
-            def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
-          }
+        stage("Init") {
+            steps {
+                sh "terraform init"
+            }
         }
-      }
-
-      stage('TF Apply') {
-        steps {
-          sh 'terraform apply -input=false'
+        stage('Validate') {
+            failFast true
+            parallel {
+                stage("driftctl") {
+                    steps {
+                        sh "which dctlenv || git clone https://github.com/wbeuil/dctlenv"
+                        sh "dctlenv use latest"
+                        sh "driftctl scan"
+                    }
+                }
+                stage("terraform/fmt") {
+                    steps {
+                        sh "terraform fmt -check -diff"
+                    }
+                }
+                stage("terraform/validate") {
+                    steps {
+                        sh "terraform validate"
+                    }
+                }
+            }
         }
-      }
-    } 
+        stage("Plan") {
+            steps {
+                sh "terraform plan -out=plan.out"
+            }
+        }
+        stage("Deploy") {
+            steps {
+                sh "terraform apply -input=false plan.out"
+            }
+        }
+    }
   }
