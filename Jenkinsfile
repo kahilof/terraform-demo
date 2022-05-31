@@ -27,7 +27,7 @@
       
         stage("driftctl") {
             steps {     
-                sh "LOG_LEVEL=error driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate"
+                sh "LOG_LEVEL=debug driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate"
             }
         }
        
