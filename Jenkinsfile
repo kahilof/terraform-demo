@@ -37,7 +37,7 @@
     //     }
          stage("Store daily reports on S3") {
               steps {
-                  sh "driftctl scan --quiet --only-managed --from tfstate+s3://this-is-terraform-state/terraform-demo/*.tfstate --output html://driftctl-report-`date '+%Y%m%d%H%M'`.html"
+                  sh "driftctl scan --quiet --from tfstate+s3://this-is-terraform-state/terraform-demo/*.tfstate --output html://driftctl-report-`date '+%Y%m%d%H%M'`.html"
                   sh "aws s3 cp driftctl-report-*.html s3://this-is-terraform-state/driftctl-report/"
               }
           }
