@@ -38,7 +38,8 @@
          stage("Store daily reports on S3") {
               steps {
                   sh "driftctl scan --quiet --from tfstate+s3://this-is-terraform-state/terraform-demo/*.tfstate --output html://driftctl-report-`date '+%Y%m%d%H%M'`.html"
-                  sh "aws s3 cp driftctl-report-*.html s3://this-is-terraform-state/driftctl-report/"
+//                   sh "aws s3 cp driftctl-report-*.html s3://this-is-terraform-state/driftctl-report/"
+                  s3Upload(file:'driftctl-report-*.html', bucket:'this-is-terraform-state', path:'driftctl-report/driftctl-report-*.html')
               }
           }
       
