@@ -25,8 +25,8 @@
              }
         }
 
-        stage(".driftignore") {
-             steps {
+        // stage(".driftignore") {
+           //  steps {
                 //  Append all current drift to .driftignore
                 // sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate -o json://stdout | driftctl gen-driftignore"
 
@@ -36,16 +36,18 @@
                 // Unmanaged resources will be excluded
                 // In this example, we use a file as an intermediate step instead of piping into
                 // gen-driftignore
-                sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate -o json://result.json"
+             //   sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate -o json://result.json"
                 
-                sh "driftctl gen-driftignore -i result.json --exclude-unmanaged"
+               // sh "driftctl gen-driftignore -i result.json --exclude-unmanaged"
 
-             }
-        }
+             // }
+        // }
       
         stage("driftctl") {
-            steps {     
-                sh "LOG_LEVEL=debug driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate"
+            steps {
+                sh "export DCTL_TF_PROVIDER_VERSION=`terraform version | grep "registry.terraform.io/hashicorp/aws" | awk '{print $4}' | cut -c 2-`"
+                sh "echo $DCTL_TF_PROVIDER_VERSION"
+                sh "LOG_LEVEL=debug driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/*.tfstate"
             }
         }
        
