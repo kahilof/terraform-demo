@@ -28,7 +28,7 @@
         stage(".driftignore") {
              steps {
         
-                sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate -o json://result.json"
+                sh "DTCL_TF_PROVIDER_VERSION=3.19.0 driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate -o json://result.json"
                 
                 sh "driftctl gen-driftignore -i result.json > .driftignore"
 
