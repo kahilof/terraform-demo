@@ -25,28 +25,20 @@
              }
         }
 
-        // stage(".driftignore") {
-           //  steps {
-                //  Append all current drift to .driftignore
-                // sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate -o json://stdout | driftctl gen-driftignore"
-
-                // Print proposed driftignore based on all current drift to stdout
-                //sh "driftctl scan -o json://stdout | driftctl gen-driftignore -o -"
-
-                // Unmanaged resources will be excluded
-                // In this example, we use a file as an intermediate step instead of piping into
-                // gen-driftignore
-             //   sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate -o json://result.json"
+        stage(".driftignore") {
+             steps {
+        
+                sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate -o json://result.json"
                 
-               // sh "driftctl gen-driftignore -i result.json --exclude-unmanaged"
+                sh "driftctl gen-driftignore -i result.json --exclude-unmanaged > .driftignore"
 
-             // }
-        // }
+              }
+         }
       
         stage("driftctl") {
             steps {
-                sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate --output json://drifts.json"
-                sh "driftctl gen-driftignore -i drifts.json > .driftignore"
+          //      sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate --output json://drifts.json"
+          //      sh "driftctl gen-driftignore -i drifts.json > .driftignore"
                 sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/*.tfstate"
             }
         }
