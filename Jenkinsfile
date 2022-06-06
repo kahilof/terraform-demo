@@ -46,6 +46,7 @@
           } catch (Exception e) {
               echo "Stage failed, but we continue"
           }
+        }
       
         stage("driftctl") {
             steps {
