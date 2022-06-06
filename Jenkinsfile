@@ -43,8 +43,10 @@
   //                 sh "aws s3 cp driftctl-report-*.html s3://this-is-terraform-state/driftctl-report/"
   //                 s3Upload(file:'driftctl-report-*.html', bucket:'this-is-terraform-state', path:'driftctl-report/driftctl-report-*.html')
             }
-          } catch (Exception e) {
-              echo "Stage failed, but we continue"
+          }, catch (Exception e) {
+              steps {
+                echo "Stage failed, but we continue"
+              }
           }
         }
       
