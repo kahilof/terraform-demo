@@ -25,15 +25,15 @@
              }
         }
 
-        stage(".driftignore") {
-             steps {
+       // stage(".driftignore") {
+         //    steps {
         
                 //sh "driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/terraform.tfstate --output json://drifts.json"
                 
                 //sh "driftctl gen-driftignore -i drifts.json > .driftignore"
 
-              }
-         }
+           //   }
+         //}
       
         stage("driftctl") {
             steps {
