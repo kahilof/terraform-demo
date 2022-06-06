@@ -45,8 +45,6 @@
       
         stage("driftctl") {
             steps {
-                sh "export DCTL_TF_PROVIDER_VERSION=`terraform version | grep "registry.terraform.io/hashicorp/aws" | awk '{print $4}' | cut -c 2-`"
-                sh "echo $DCTL_TF_PROVIDER_VERSION"
                 sh "LOG_LEVEL=debug driftctl scan --from tfstate+s3://this-is-terraform-state/terraform-demo/*.tfstate"
             }
         }
