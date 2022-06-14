@@ -6,7 +6,7 @@
         PATH="$PATH:$HOME/dctlenv/bin/"
     }
 
-//     stages {
+    stages {
 //         stage("Destroy") {
 //               steps {
 //                   sh "terraform destroy -auto-approve"
