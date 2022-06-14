@@ -7,15 +7,16 @@
     }
 
     stages {
-        stage("Destroy") {
-              steps {
-                  sh "terraform destroy -auto-approve"
-              }
-          }
       
         stage("Init") {
             steps {
                 sh "terraform init -reconfigure"
+            }
+        }
+      
+        stage("Destroy") {
+            steps {
+                sh "terraform destroy -auto-approve"
             }
         }
       
