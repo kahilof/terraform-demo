@@ -7,11 +7,11 @@
     }
 
     stages {
-//         stage("Destroy") {
-//               steps {
-//                   sh "terraform destroy -auto-approve"
-//               }
-//           }
+        stage("Destroy") {
+              steps {
+                  sh "terraform destroy -auto-approve"
+              }
+          }
       
         stage("Init") {
             steps {
