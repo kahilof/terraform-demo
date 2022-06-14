@@ -6,12 +6,12 @@
         PATH="$PATH:$HOME/dctlenv/bin/"
     }
 
-    stages {
-        stage("Destroy") {
-              steps {
-                  sh "terraform destroy -auto-approve"
-              }
-          }
+//     stages {
+//         stage("Destroy") {
+//               steps {
+//                   sh "terraform destroy -auto-approve"
+//               }
+//           }
       
         stage("Init") {
             steps {
