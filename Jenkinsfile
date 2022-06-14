@@ -14,11 +14,11 @@
             }
         }
       
-        stage("Destroy") {
-            steps {
-                sh "terraform destroy -auto-approve"
-            }
-        }
+//         stage("Destroy") {
+//             steps {
+//                 sh "terraform destroy -auto-approve"
+//             }
+//         }
       
         stage("terraform/fmt") {
             steps {
