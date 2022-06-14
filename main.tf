@@ -5,7 +5,7 @@ module "ec2" {
   instance_name = var.instance_name
 }
 
-module "s3" {
-  source = "./modules/s3"
+# module "s3" {
+#   source = "./modules/s3"
   
-}
+# }
