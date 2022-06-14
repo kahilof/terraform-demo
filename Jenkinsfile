@@ -27,7 +27,7 @@
 
         stage("driftctl") {
             steps {
-                sh "driftctl scan --only-managed --from tfstate+s3://this-is-terraform-state/terraform-demo-a/*.tfstate"
+                sh "driftctl scan --only-managed --from tfstate+s3://this-is-terraform-state/terraform-demo/*.tfstate"
             }
         }
        
