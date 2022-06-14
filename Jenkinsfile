@@ -9,7 +9,7 @@
     stages {
         stage("Destroy") {
               steps {
-                  sh "terraform destroy"
+                  sh "terraform destroy -auto-approve"
               }
           }
       
