@@ -7,6 +7,12 @@
     }
 
     stages {
+        stage("Destroy") {
+              steps {
+                  sh "terraform destroy"
+              }
+          }
+      
         stage("Init") {
             steps {
                 sh "terraform init -reconfigure"
